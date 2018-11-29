@@ -9,7 +9,6 @@
       "email": "molinchenxi@gmail.com"
     }
   ],
-  "minimum-stability": "dev",
   "require": {
     "php": ">=7.1.0",
     "guzzlehttp/guzzle": "~5.0|~6.0"
