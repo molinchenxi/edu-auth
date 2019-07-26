@@ -6,28 +6,17 @@ shanghai edu unified identity authentication
 
 ## Usage
 
-1. Set a redirect url
-```
-   //for example
-   // http://x.xx.xxx/callback
-```
-
-2. Get auth object 
+1. 获取三方调用链接
 ```
    $auth = new \EduOauth\Auth();
-```
-
-3. Set redirect url to auth object 
-```
-   $auth = $auth->getOauthLink('http://x.xx.xxx/callback');
-   // redirect or other things ......
+   $link = $auth->getOauthLink('http://x.xx.xxx/callback');
 ```
 
 
-4. You can receive a code in callback url, then do as below
+2. 通过 code 获取三方用户信息
 ```
-    // code
     $code = $GET['code'];
     $auth = (new \EduOauth\Auth())->setCallBack('http://x.xx.xxx/callback');
     $userInfo = $auth->getUserInfo();
+    
 ```
