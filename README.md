@@ -1,7 +1,7 @@
 # edu-auth
 shanghai edu unified identity authentication
 
-## install
+## Install
 `composer require mo-lin/edu-auth`
 
 ## Usage
