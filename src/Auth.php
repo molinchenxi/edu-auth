@@ -30,7 +30,7 @@ class Auth implements AuthContract
     /**
      * ProfileAbstract constructor.
      */
-    public function __construct($baseUri = 'http://cas2.edu.sh.cn', $clientId = 'clientId', $clientSecret = 'clientSecret')
+    public function __construct($baseUri = 'http://cas2.edu.sh.cn', $clientId = 'clientid', $clientSecret = 'clientSecret')
     {
         // $this->baseUri = 'http://cas2.edu.sh.cn';
         $this->baseUri = $baseUri;
