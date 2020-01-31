@@ -23,12 +23,22 @@ class Auth implements AuthContract
      */
     protected $client;
 
+    protected $clientId;
+
+    protected $clientSecret;
+
     /**
      * ProfileAbstract constructor.
      */
-    public function __construct()
+    public function __construct($baseUri = 'http://cas2.edu.sh.cn', $clientId = 'clientId', $clientSecret = 'clientSecret')
     {
-        $this->baseUri = 'http://cas2.edu.sh.cn';
+        // $this->baseUri = 'http://cas2.edu.sh.cn';
+        $this->baseUri = $baseUri;
+
+
+        $this->clientId = $clientId;
+
+        $this->clientSecret = $clientSecret;
 
         $this->client = new Client([
             'base_uri' => $this->baseUri,
@@ -46,7 +56,7 @@ class Auth implements AuthContract
             $this->setCallBack($redirectUrl);
         }
 
-        return $this->baseUri . '/CAS/oauth2.0/authorize?client_id=clientid&redirect_uri=' . $this->callback;
+        return  "{$this->baseUri}/CAS/oauth2.0/authorize?client_id={$this->clientId}&redirect_uri={$this->callback}";
     }
 
     /**
@@ -80,8 +90,13 @@ class Auth implements AuthContract
         try {
             $this->hasCallBack();
 
-            $response = $this->client->get(sprintf("CAS/oauth2.0/accessToken?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s",
-                "clientid", "clientSecret", $this->callback, $code));
+            $response = $this->client->get(sprintf(
+                "CAS/oauth2.0/accessToken?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s",
+                $this->clientId,
+                $this->clientSecret,
+                $this->callback,
+                $code
+            ));
         } catch (ClientException $exception) {
             throw new LogicException($exception->getResponse()->getBody()->getContents());
         }
